@@ -124,7 +124,7 @@ output "neptune_clusters_replication_source_identifier" {
 }
 output "neptune_clusters_serverless_v2_scaling_configuration" {
   description = "Map of serverless_v2_scaling_configuration values across all neptune_clusters, keyed the same as var.neptune_clusters"
-  value       = { for k, v in aws_neptune_cluster.neptune_clusters : k => v.serverless_v2_scaling_configuration if v.serverless_v2_scaling_configuration != null && length(v.serverless_v2_scaling_configuration) > 0 }
+  value       = { for k, v in aws_neptune_cluster.neptune_clusters : k => one(v.serverless_v2_scaling_configuration) if v.serverless_v2_scaling_configuration != null && length(v.serverless_v2_scaling_configuration) > 0 }
 }
 output "neptune_clusters_skip_final_snapshot" {
   description = "Map of skip_final_snapshot values across all neptune_clusters, keyed the same as var.neptune_clusters"
